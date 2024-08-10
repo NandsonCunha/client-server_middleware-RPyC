@@ -1,7 +1,9 @@
 import rpyc
 import os
+import time
 
 arquivos = {}
+interesses = {}
 
 
 def upload_files(file, data):
@@ -23,4 +25,10 @@ def download_files(file):
         print(f"{file} não encontrado")
 
 
-def register_interest(file, duration, tempo):
+def register_interest(file, duration):
+    if file not in arquivos:
+        interesses[file] = []
+        expiry_time = time.time() + duration
+        interesses[file].append(expiry_time)
+        return f"Interesse registrado em {file} por {duration} segundos."
+    
