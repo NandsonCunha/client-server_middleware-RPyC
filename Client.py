@@ -27,10 +27,12 @@ def input_register_interest():
     textDialog = customtkinter.CTkInputDialog(text="Digite O Nome do Arquivo de Interesse",title="Marcar Interesse")
     print("Arquivo",textDialog.get_input())
 
-
+# setPreviewFile --> mostra o caminho do arquivo no input
 def setPreviewFile(filepath):
     path_entry.insert(0,filepath)
 
+
+# selectFile --> abre uma tela que possiilita a escolha do arquivo
 def selectFile():
     global filename
     filename=filedialog.askopenfilename(
