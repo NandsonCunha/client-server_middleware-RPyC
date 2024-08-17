@@ -13,7 +13,33 @@ import shutil
 def upload_file(remote_service, file_name, data):
     response = remote_service.upload_file(file_name, data)
     print(response)
+    
+    
+def list_files(remote_service):
+    files = remote_service.list_files()
+    print("Arquivos disponíveis no servidor:")
+    for file in files:
+        print(f"- {file}")
+        
 
+def download_file(remote_service, file_name):
+    data = remote_service.download_file(file_name)
+    if data:
+        print(f"Conteúdo do arquivo {file_name}:")
+        print(data)
+    else:
+        print(f"Arquivo {file_name} não encontrado no servidor.")
+
+
+def register_interest(remote_service, file_name, duration):
+    response = remote_service.register_interest(file_name, rpyc.async_(notify), duration)
+    print(response)
+    
+
+def cancel_interest(remote_service, file_name):
+    response = remote_service.cancel_interest(file_name, rpyc.async_(notify))
+    print(response)
+    
 
 if __name__ == "__main__":
     conn = rpyc.connect("localhost", 12345)
